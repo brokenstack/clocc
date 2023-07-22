@@ -1,0 +1,30 @@
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.menu-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 50px;
+    justify-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#time-text {
+    font-size: 13vw;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    font-weight: bold;
+    cursor: default;
+}
+
+#am-pm-text {
+    font-size: 2vw;
+}
