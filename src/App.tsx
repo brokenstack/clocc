@@ -9,6 +9,11 @@ function App() {
                 ? "dark"
                 : "light")
     );
+
+    const switchTheme = () => {
+        setStoredTheme(storedTheme == "light" ? "dark" : "light");
+    };
+
     const [time, setTime] = useState(new Date());
 
     useEffect(() => {
@@ -25,23 +30,27 @@ function App() {
         };
     }, []);
 
-    const switchTheme = () => {
-        setStoredTheme(storedTheme == "light" ? "dark" : "light");
-    };
-
     const [fullScreen, setFullScreen] = useState(
         Boolean(document.fullscreenElement)
     );
 
     const toggleFullScreen = async () => {
-        try {
-            await (document.fullscreenElement
-                ? document.exitFullscreen()
-                : document.documentElement.requestFullscreen());
-        } finally {
-            setFullScreen(Boolean(document.fullscreenElement));
-        }
+        await (document.fullscreenElement
+            ? document.exitFullscreen()
+            : document.documentElement.requestFullscreen());
     };
+
+    useEffect(() => {
+        document.addEventListener("fullscreenchange", () =>
+            setFullScreen(Boolean(document.fullscreenElement))
+        );
+
+        return () => {
+            document.removeEventListener("fullscreenchange", () =>
+                setFullScreen(Boolean(document.fullscreenElement))
+            );
+        };
+    }, []);
 
     return (
         <>
